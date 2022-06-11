@@ -42,7 +42,6 @@ def remove_target_color(color, data_file_name, positive, negative):
             mod_sent_list = tokens.copy()
 
             lines_list = []
-            sents_list = []
             colors_list = []
             words_index_list = []
             concepts_list = []
@@ -64,7 +63,6 @@ def remove_target_color(color, data_file_name, positive, negative):
 
                     if if_match == 1:
                         lines_list.append(line)
-                        sents_list.append(sent_index)
                         colors_list.append(color)
                         words_index_list.append(word_index)
                         concepts_list.append(concept)
@@ -75,7 +73,7 @@ def remove_target_color(color, data_file_name, positive, negative):
                         final_list = ' '.join(mod_sent_list)
 
             if if_match == 1:
-                json_df = {"sent": lines_list, "sent_index": sents_list, "color": colors_list,
+                json_df = {"sent": lines_list, "sent_index": sent_index, "color": colors_list,
                            "word_index": words_index_list, "concept": concepts_list, "window": window_vocab_list,
                            "flag": flag}
 
@@ -87,11 +85,13 @@ def remove_target_color(color, data_file_name, positive, negative):
                     f.write(line + "\n")
 
         meta_df = pd.DataFrame(tmp_meta)
-        meta_df.to_csv(f"modified_dataset/remove_target_color_{color}_metadata.csv")
+        meta_df.to_csv(f"modified_dataset/remove_target_color_{color}_metadata.csv", index=False)
 
 
 if __name__ == "__main__":
     start_time = time.time()
+
+    # around 40 minutes for the execution
 
     input_color = 'black'
     pos_attributes_path = "is_black-pos"

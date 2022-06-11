@@ -32,7 +32,6 @@ def remove_all_colors(colors, data_file_name):
 
             mod_sent_list = tokens.copy()
             lines_list = []
-            sents_list = []
             colors_list = []
             words_index_list = []
             concepts_list = []
@@ -62,7 +61,6 @@ def remove_all_colors(colors, data_file_name):
                             # concept window size
 
                             lines_list.append(line)
-                            sents_list.append(sent_index)
                             colors_list.append(color)
                             words_index_list.append(word_index)
                             concepts_list.append(concept)
@@ -77,7 +75,7 @@ def remove_all_colors(colors, data_file_name):
             if if_match == 1:
 
                 # save metadata
-                json_df = {"sent": lines_list, "sent_index": sents_list, "color": colors_list,
+                json_df = {"sent": lines_list, "sent_index": sent_index, "color": colors_list,
                            "word_index": words_index_list, "concept": concepts_list, "window": window_vocab_list}
 
                 # save modified sentence (without a color) to the file
@@ -90,11 +88,13 @@ def remove_all_colors(colors, data_file_name):
                     f.write(line + "\n")
 
         meta_df = pd.DataFrame(tmp_meta)
-        meta_df.to_csv("modified_dataset/remove_all_colors_metadata.csv")
+        meta_df.to_csv("modified_dataset/remove_all_colors_metadata.csv", index=False)
 
 
 if __name__ == "__main__":
     start_time = time.time()
+
+    # around 1 hour for the execution
 
     input_list = ['black', 'yellow', 'red', 'green', 'brown', 'white']
     # data_file = "piece_of_data"
