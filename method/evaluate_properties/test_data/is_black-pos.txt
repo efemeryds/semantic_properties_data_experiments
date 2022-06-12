@@ -1,0 +1,12 @@
+starling
+stockings
+suit
+tarantula
+taxi
+tiger
+tights
+tyre
+wand
+wasp
+wetsuit
+zebra
