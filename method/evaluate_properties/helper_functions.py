@@ -30,7 +30,7 @@ def create_arbitrary_train_test_split(input, concept, type, threshold=0.8):
 
 
 if __name__ == "__main__":
-    dir = "../remove/concepts_lists/"
+    dir = "../remove_attributes/concepts_lists/"
     input_path_pos = f'{dir}is_black-pos.txt'
     input_path_neg = f'{dir}is_black-neg-all.txt'
     concept = "is_black"

@@ -66,7 +66,7 @@ def remove_all_colors(colors, data_file_name):
                             concepts_list.append(concept)
                             window_vocab_list.append(window_vocab)
 
-                            # remove the color from the list of tokens to save it to a new dataset
+                            # remove_attributes the color from the list of tokens to save it to a new dataset
                             mod_sent_list.remove(color)
 
                             # create a string out of the list of tokens
