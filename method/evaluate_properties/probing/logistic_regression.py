@@ -195,17 +195,18 @@ def main_lr(model_type, features, model_name, experiment_name):
     for feat in features:
         words, predictions = logistic_regression_classification(model, feat, feat)
         results_to_file(words, predictions, model_name, experiment_name, feat)
+    return
 
 
 if __name__ == "__main__":
+    pass
 
-    # TODO: classic logistic regression
-
-    experiment_name = 'logistic_regression'
-    path_to_model = '../../trained_models/google_news.bin'
-    model_name = 'google_news'
-    features = ['is_black']
-
-    # loads w2v model
-    w2v_model = load_word2vec_model(path_to_model)
-    main_lr(w2v_model, features, model_name, experiment_name)
+    #
+    # experiment_name = 'logistic_regression'
+    # path_to_model = '../../trained_models/google_news.bin'
+    # model_name = 'google_news'
+    # features = ['is_black']
+    #
+    # # loads w2v model
+    # w2v_model = load_word2vec_model(path_to_model)
+    # main_lr(w2v_model, features, model_name, experiment_name)

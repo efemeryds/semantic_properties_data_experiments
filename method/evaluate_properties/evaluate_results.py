@@ -40,7 +40,7 @@ def evaluate(labels, predictions):
 
 
 def load_gold(feature):
-    data = '../test_data/'
+    data = 'test_data/'
 
     with open(f"{data}{feature}-pos.txt") as infile:
         words_pos = infile.read().strip().split('\n')
@@ -62,7 +62,7 @@ def evaluate_all(feature):
     labels = get_truth(feature)
     scores = []
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    results_paths = glob.glob(f'../results/*/*/{feature}.txt', recursive=True)
+    results_paths = glob.glob(f'results/*/*/{feature}.txt', recursive=True)
     cols = ['f1', 'p', 'r', 'oov']
     indices = []
     values = []
@@ -80,7 +80,7 @@ def evaluate_all(feature):
 
 
 def main():
-    dir = '../evaluation/'
+    dir = 'evaluation/'
     features = ['is_black']
 
     if not os.path.isdir(dir):

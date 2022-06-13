@@ -3,7 +3,8 @@ import pandas as pd
 
 
 def load_word2vec_model(path):
-    matrix = KeyedVectors.load_word2vec_format(path, binary=True)
+    final_path = f"../{path}"
+    matrix = KeyedVectors.load_word2vec_format(final_path, binary=True)
     model = ('w2v', matrix)
     return model
 

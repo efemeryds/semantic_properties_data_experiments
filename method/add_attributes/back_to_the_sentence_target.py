@@ -47,30 +47,26 @@ def train_corpus(file_path, final_file_name: str):
     print("Finished one embedding variation !")
 
 
-def run_experiment(target, sent_amount, pos, neg, meta):
+def run_experiment(target, sent_amount, meta):
     # load metadata csv
     metadata = pd.read_csv(meta)
     sub_metadata = metadata[metadata['flag'] == 'pos']
 
     # take first n sentences that are positive examples
-    # TODO: REMOVE LATER
 
     sub_metadata = sub_metadata.iloc[:sent_amount]
-    tmp_sub_index = [ast.literal_eval(item) for item in list(sub_metadata['sent_index'])]
-    sub_indexes = list(set([val for sublist in tmp_sub_index for val in sublist]))
-    sub_indexes.sort()
-    sub_metadata['prop_indexes'] = sub_indexes
+    sub_indexes = list(sub_metadata['sent_index'])
 
     # iterate through the whole corpus - created by using target_color_with_concept.py
 
-    # with open(f"../remove_attributes/modified_dataset/remove_target_color_{target}.txt") as infile
-    with open(f"../../raw_data/piece_of_data.txt") as infile:
+    with open(f"../remove_attributes/modified_dataset/remove_target_color_{target}.txt") as infile:
+    #with open(f"../../raw_data/piece_of_data.txt") as infile:
         for sent_index, line in enumerate(infile):
             # if the current sentence index is the same as the one from the chosen set then
             # add_attributes the target color into a proper place
             if sent_index in sub_indexes:
                 tokens = line.split()
-                tmp_meta = sub_metadata[sub_metadata['prop_indexes'] == sent_index]
+                tmp_meta = sub_metadata[sub_metadata['sent_index'] == sent_index]
                 colors = ast.literal_eval(tmp_meta['color'].iloc[0])
                 colors_indexes = ast.literal_eval(tmp_meta['word_index'].iloc[0])
                 for k in range(len(colors)):
@@ -96,6 +92,8 @@ def run_experiment(target, sent_amount, pos, neg, meta):
 if __name__ == "__main__":
     start_time = time.time()
 
+    # approximately 3 hours
+
     input_color = 'black'
     pos_attributes_path = "is_black-pos"
     neg_attributes_path = "is_black-neg-all"
@@ -103,6 +101,6 @@ if __name__ == "__main__":
 
     # variations = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768]
     var = 10
-    run_experiment(input_color, var, pos_attributes_path, neg_attributes_path, metadata_path)
+    run_experiment(input_color, var, pos_attributes_path)
 
     print("--- %s seconds ---" % (time.time() - start_time))
