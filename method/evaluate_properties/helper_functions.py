@@ -29,7 +29,6 @@ def create_arbitrary_train_test_split(input, concept, type, threshold=0.8):
             f.write(line + "\n")
 
 
-
 if __name__ == "__main__":
     dir = "../remove_attributes/concepts_lists/"
     input_path_pos = f'{dir}is_black-pos.txt'

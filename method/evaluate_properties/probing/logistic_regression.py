@@ -7,11 +7,11 @@ import os
 
 
 # prepares the raw_data and labels
-def load_data(feature, path='../training_data/'):
+def load_data(feature, path='../training_data/', add_file=''):
     os.chdir(os.path.dirname(__file__))
-    with open(path + feature + '-pos.txt') as infile:
+    with open(path + add_file + feature + '-pos.txt') as infile:
         words_pos = infile.read().strip().split('\n')
-    with open(path + feature + '-neg-all.txt') as infile:
+    with open(path + add_file + feature + '-neg-all.txt') as infile:
         words_neg = infile.read().strip().split('\n')
     return words_pos, words_neg
 
@@ -82,9 +82,9 @@ def lr_classification_loo(x, y):
     return predictions
 
 
-def results_to_file(input_words, final_predictions, model_name, experiment_name, feature):
+def results_to_file(input_words, final_predictions, model_name, experiment_name, feature, add_info):
     results_dir = '../results/'
-    model_dir = model_name + '/'
+    model_dir = add_info + model_name + '/'
     experiment_name_dir = experiment_name + '/'
     dir_list = [results_dir, model_dir, experiment_name_dir]
     dir_str = ''
@@ -92,7 +92,7 @@ def results_to_file(input_words, final_predictions, model_name, experiment_name,
         dir_str = dir_str + d
         if not os.path.isdir(dir_str):
             os.mkdir(dir_str)
-    with open(dir_str + feature + '.txt', 'w') as outfile:
+    with open(dir_str  + feature + '.txt', 'w') as outfile:
         for word, pred in zip(input_words, final_predictions):
             outfile.write(','.join([word, str(pred), '\n']))
 
@@ -149,10 +149,10 @@ def lr_classification(x_train, y_train, x_test):
     return predictions
 
 
-def logistic_regression_classification(model, feature_train, feature_test):
+def logistic_regression_classification(model, feature_train, feature_test, add_file_ext):
     final_predictions = []
 
-    words_pos_train, words_neg_train = load_data(feature_train)
+    words_pos_train, words_neg_train = load_data(feature_train, add_file=add_file_ext)
 
     vecs_pos_train, wi_dict_pos_train = load_vectors(model, words_pos_train)
     vecs_neg_train, wi_dict_neg_train = load_vectors(model, words_neg_train)
@@ -165,7 +165,7 @@ def logistic_regression_classification(model, feature_train, feature_test):
 
     y_train = np.array(y_train)
 
-    words_pos_test, words_neg_test = load_data(feature_test, path='../test_data/')
+    words_pos_test, words_neg_test = load_data(feature_test, path='../test_data/', add_file=add_file_ext)
 
     vecs_pos_test, wi_dict_pos_test = load_vectors(model, words_pos_test)
     vecs_neg_test, wi_dict_neg_test = load_vectors(model, words_neg_test)
@@ -189,12 +189,12 @@ def logistic_regression_classification(model, feature_train, feature_test):
     return words_test, final_predictions
 
 
-def main_lr(model_type, features, model_name, experiment_name):
+def main_lr(model_type, features, model_name, experiment_name, additional_file_ext):
     model = model_type
 
     for feat in features:
-        words, predictions = logistic_regression_classification(model, feat, feat)
-        results_to_file(words, predictions, model_name, experiment_name, feat)
+        words, predictions = logistic_regression_classification(model, feat, feat, additional_file_ext)
+        results_to_file(words, predictions, model_name, experiment_name, feat, additional_file_ext)
     return
 
 

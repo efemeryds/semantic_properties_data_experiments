@@ -93,11 +93,21 @@ if __name__ == "__main__":
 
     # around 40 minutes for the execution
 
-    input_color = 'black'
-    pos_attributes_path = "is_black-pos"
-    neg_attributes_path = "is_black-neg-all"
-    # data_path = "piece_of_data"
     data_path = "data"
+
+    # input_color = 'black'
+    # pos_attributes_path = "black-pos"
+    # neg_attributes_path = "black-neg-all"
+
+    # black color
+    # remove_target_color(input_color, data_path, pos_attributes_path, neg_attributes_path)
+
+    input_color = 'yellow'
+    pos_attributes_path = "yellow-pos"
+    neg_attributes_path = "yellow-neg-all"
+
+    # x color
     remove_target_color(input_color, data_path, pos_attributes_path, neg_attributes_path)
 
     print("--- %s seconds ---" % (time.time() - start_time))
+

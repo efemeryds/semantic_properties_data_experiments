@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 .idea/
 /method/remove_attributes/modified_dataset/
+raw_data/data.txt
+raw_data/wikipages_full_shuffled.txt.ascii.tokenize.no-duplicates.lower.no_dash_punct_abbr_oneletterwords.bz2

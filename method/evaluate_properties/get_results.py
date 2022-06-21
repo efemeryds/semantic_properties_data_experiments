@@ -8,7 +8,7 @@ def load_word2vec_model(path):
     return model
 
 
-def evaluate_embeddings(absolute_path, file_name: str):
+def evaluate_embeddings(absolute_path, file_name: str, train_test_file):
     experiment_name = 'logistic_regression'
 
     # experiments = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768]
@@ -18,14 +18,19 @@ def evaluate_embeddings(absolute_path, file_name: str):
 
     # loads w2v model
     w2v_model = load_word2vec_model(path_to_model)
-    main_lr(w2v_model, features, file_name, experiment_name)
+    main_lr(w2v_model, features, file_name, experiment_name, train_test_file)
     return
 
 
 if __name__ == "__main__":
     abs_path = "/home/alicja/repos/semantic_properties_data_experiments/method/add_attributes/learnt_embeddings/"
 
-    paths = ["all_black_color_removed", "all_colors_removed", "no_removal_baseline"]
+    # paths = ["all_black_color_removed", "all_colors_removed", "no_removal_baseline"]
+    paths = ["all_colors_removed", "no_removal_baseline"]
+
+    train_test_splits = ['', 'random-']
+
     for file_path in paths:
-        evaluate_embeddings(abs_path, file_path)
+        for split_path in train_test_splits:
+            evaluate_embeddings(abs_path, file_path, split_path)
 

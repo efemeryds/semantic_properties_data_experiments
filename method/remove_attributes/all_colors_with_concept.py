@@ -37,40 +37,39 @@ def remove_all_colors(colors, data_file_name):
             concepts_list = []
             window_vocab_list = []
 
-            for color in colors:
-                for word_index, word in enumerate(tokens):
-                    if color == word:
-                        # get the window around the color
-                        tmp_window_lower = word_index - 2
-                        tmp_window_upper = word_index + 3
+            for word_index, word in enumerate(tokens):
+                if word in colors:
+                    # get the window around the color
+                    tmp_window_lower = word_index - 2
+                    tmp_window_upper = word_index + 3
 
-                        window_lower = max(0, tmp_window_lower)
-                        window_upper = min(len(tokens), tmp_window_upper)
+                    window_lower = max(0, tmp_window_lower)
+                    window_upper = min(len(tokens), tmp_window_upper)
 
-                        window_vocab = tokens[window_lower:window_upper].copy()
-                        window_vocab.remove(color)
+                    window_vocab = tokens[window_lower:window_upper].copy()
+                    window_vocab.remove(word)
 
-                        # if the concept is within the window vocab then it means we have a match
-                        # here we do not flag whether it is positive or negative concept - difficult as the list
-                        # of concepts is merged, but we can still get this information later when adding the vocab
-                        # back to the data by comparing the window vocab with original pos and neg lists
-                        concept, if_match = find_pair(all_concepts, window_vocab)
+                    # if the concept is within the window vocab then it means we have a match
+                    # here we do not flag whether it is positive or negative concept - difficult as the list
+                    # of concepts is merged, but we can still get this information later when adding the vocab
+                    # back to the data by comparing the window vocab with original pos and neg lists
+                    concept, if_match = find_pair(all_concepts, window_vocab)
 
-                        if if_match == 1:
-                            # append the data to a list because it may happen that there are two colors within the same
-                            # concept window size
+                    if if_match == 1:
+                        # append the data to a list because it may happen that there are two colors within the same
+                        # concept window size
 
-                            lines_list.append(line)
-                            colors_list.append(color)
-                            words_index_list.append(word_index)
-                            concepts_list.append(concept)
-                            window_vocab_list.append(window_vocab)
+                        lines_list.append(line)
+                        colors_list.append(word)
+                        words_index_list.append(word_index)
+                        concepts_list.append(concept)
+                        window_vocab_list.append(window_vocab)
 
-                            # remove_attributes the color from the list of tokens to save it to a new dataset
-                            mod_sent_list.remove(color)
+                        # remove_attributes the color from the list of tokens to save it to a new dataset
+                        mod_sent_list.remove(word)
 
-                            # create a string out of the list of tokens
-                            final_list = ' '.join(mod_sent_list)
+                        # create a string out of the list of tokens
+                        final_list = ' '.join(mod_sent_list)
 
             if if_match == 1:
 
@@ -96,7 +95,7 @@ if __name__ == "__main__":
 
     # around 1 hour for the execution
 
-    input_list = ['black', 'yellow', 'red', 'green', 'brown', 'white']
+    input_list = ['black', 'blue', 'green', 'red', 'yellow']
     # data_file = "piece_of_data"
     data_file = "data"
     remove_all_colors(input_list, data_file)
