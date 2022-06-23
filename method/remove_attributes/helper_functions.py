@@ -9,8 +9,9 @@ from collections import Counter
 def create_all_concepts_file():
     dir_path = "concepts_lists/"
     all_files = os.listdir(dir_path)
+    final_files = [x for x in all_files if "random" not in x]
 
-    for file in all_files:
+    for file in final_files:
         with open(f"{dir_path}{file}") as infile:
             for line in infile:
                 with open(f'{dir_path}/all_concepts.txt', 'a') as f:
@@ -118,7 +119,8 @@ def random_class_assignment(color_name):
 
 
 if __name__ == "__main__":
-    # create_all_concepts_file()
+    create_all_concepts_file()
+
     start_time = time.time()
     colors = ["black", "blue", "green", "red", "yellow"]
 
@@ -130,9 +132,9 @@ if __name__ == "__main__":
 
     raw_data_file_name = "data"
     # check_color_frequencies(raw_data_file_name)
-    # random_class_assignment("black")
+
+    # random_class_assignment("yellow")
 
     # Counter({'black': 505540, 'red': 407719, 'green': 292969, 'blue': 248575, 'yellow': 116896})
 
     print("--- %s seconds ---" % (time.time() - start_time))
-

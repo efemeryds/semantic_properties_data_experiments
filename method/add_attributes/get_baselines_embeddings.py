@@ -30,14 +30,19 @@ class Callback(CallbackAny2Vec):
 
 def train_corpus(file_path, final_file_name: str):
     input_path = f"{file_path}.txt"
-    model = Word2Vec(corpus_file=input_path, compute_loss=True, callbacks=[Callback()], workers=8, vector_size=300,
-                     window=5, min_count=5, sg=1, epochs=5)
+    model = Word2Vec(corpus_file=input_path, compute_loss=True, callbacks=[Callback()], workers=8, vector_size=200,
+                     window=5, min_count=5, sg=1, epochs=3)
     model.wv.save_word2vec_format(f"{final_file_name}.bin", binary=True)
-    os.remove(f"{file_path}.txt")
+    # os.remove(f"{file_path}.txt")
     print("Finished one embedding variation !")
 
 
 if __name__ == "__main__":
-    train_corpus("../../raw_data/data", "no_removal_baseline")
-    train_corpus("../remove_attributes/modified_dataset/remove_all_colors", "all_colors_removed")
+    # train_corpus("../../raw_data/data", "no_removal_baseline")
+    # train_corpus("../remove_attributes/modified_dataset/remove_all_colors", "all_colors_removed")
+
+    train_corpus("../remove_attributes/modified_dataset/remove_target_color_black", "only_black_removed")
+    train_corpus("../remove_attributes/modified_dataset/remove_target_color_yellow", "only_yellow_removed")
+
+
     # train_corpus("../remove_attributes/modified_dataset/remove_target_color_black", "all_black_color_removed")

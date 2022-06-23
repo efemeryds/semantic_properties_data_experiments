@@ -42,14 +42,14 @@ class Callback(CallbackAny2Vec):
 
 def train_corpus(file_path, final_file_name: str):
     input_path = f"{file_path}.txt"
-    model = Word2Vec(corpus_file=input_path, compute_loss=True, callbacks=[Callback()], workers=8, vector_size=300,
-                     window=5, min_count=5, sg=1, epochs=5)
+    model = Word2Vec(corpus_file=input_path, compute_loss=True, callbacks=[Callback()], workers=8, vector_size=200,
+                     window=5, min_count=5, sg=1, epochs=3)
     model.wv.save_word2vec_format(f"{final_file_name}.bin", binary=True)
     os.remove(f"{file_path}.txt")
     print("Finished one embedding variation !")
 
 
-def run_experiment(target, ratio, meta):
+def run_experiment(target, ratio, meta, data_path):
     # load metadata csv
     metadata = pd.read_csv(meta)
 
@@ -128,27 +128,20 @@ if __name__ == "__main__":
     # 12k black and positive sentence is available
 
     input_color = 'black'
-    pos_attributes_path = "is_black-pos"
-    neg_attributes_path = "is_black-neg-all"
 
     metadata_path = "../remove_attributes/modified_dataset/remove_target_color_black_metadata.csv"
-    data_path = "../remove_attributes/modified_dataset/remove_target_color_black"
+    data_p = "../remove_attributes/modified_dataset/remove_target_color_black"
 
-    input_color = 'yellow'
-    pos_attributes_path = "is_yellow-pos"
-    neg_attributes_path = "is_yellow-neg-all"
-
-    metadata_path = "../remove_attributes/modified_dataset/remove_target_color_yellow_metadata.csv"
-    data_path = "../remove_attributes/modified_dataset/remove_target_color_yellow"
-
-
-    # variations = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768]
-    # var = [4000, 8000]
     proportion = [0.5]
 
-    # Add all half pos and half neg back to the sentence
+    for v in proportion:
+        run_experiment(input_color, v, metadata_path, data_p)
+
+    input_color = 'yellow'
+    metadata_path = "../remove_attributes/modified_dataset/remove_target_color_yellow_metadata.csv"
+    data_p = "../remove_attributes/modified_dataset/remove_target_color_yellow"
 
     for v in proportion:
-        run_experiment(input_color, v, metadata_path)
+        run_experiment(input_color, v, metadata_path, data_p)
 
     print("--- %s seconds ---" % (time.time() - start_time))

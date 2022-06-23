@@ -11,9 +11,8 @@ import time
 def find_pair(all_concepts, window_vocab):
     for concept in all_concepts:
         concept = concept.strip()
-        for window_word in window_vocab:
-            if concept == window_word:
-                return concept, 1
+        if concept in window_vocab:
+            return concept, 1
     return "", 0
 
 

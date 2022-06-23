@@ -81,7 +81,7 @@ def evaluate_all(feature):
 
 def main():
     dir = 'evaluation/'
-    features = ['is_black']
+    features = ['is_black', 'is_yellow']
 
     if not os.path.isdir(dir):
         os.mkdir(dir)

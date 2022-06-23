@@ -1,4 +1,7 @@
 ,f1,p,r,oov
-no_removal_baseline-logistic_regression-is_black,0.3846153846153846,0.35714285714285715,0.4166666666666667,4
-all_black_color_removed-logistic_regression-is_black,0.28571428571428575,0.25,0.3333333333333333,4
-all_colors_removed-logistic_regression-is_black,0.26666666666666666,0.2222222222222222,0.3333333333333333,4
+all_colors_removed-logistic_regression-is_black,0.7619047619047619,0.7741935483870968,0.75,0
+only_black_removed-logistic_regression-is_black,0.7301587301587302,0.7419354838709677,0.71875,0
+no_removal_baseline-logistic_regression-is_black,0.7,0.75,0.65625,0
+random-only_black_removed-logistic_regression-is_black,0.6956521739130435,0.6486486486486487,0.75,0
+random-all_colors_removed-logistic_regression-is_black,0.676056338028169,0.6153846153846154,0.75,0
+random-no_removal_baseline-logistic_regression-is_black,0.6086956521739131,0.5675675675675675,0.65625,0
