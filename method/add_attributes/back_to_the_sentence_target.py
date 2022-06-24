@@ -45,11 +45,12 @@ def train_corpus(file_path, final_file_name: str):
     model = Word2Vec(corpus_file=input_path, compute_loss=True, callbacks=[Callback()], workers=8, vector_size=200,
                      window=5, min_count=5, sg=1, epochs=3)
     model.wv.save_word2vec_format(f"{final_file_name}.bin", binary=True)
-    os.remove(f"{file_path}.txt")
+    # os.remove(f"{file_path}.txt")
     print("Finished one embedding variation !")
 
 
 def run_experiment(target, ratio, meta, data_path):
+    start_time = time.time()
     # load metadata csv
     metadata = pd.read_csv(meta)
 
@@ -60,8 +61,6 @@ def run_experiment(target, ratio, meta, data_path):
     # take portion of negative examples
     neg_sub_metadata = metadata[metadata['flag'] == 'neg']
     neg_amount = int(len(neg_sub_metadata) * ratio)
-
-    # TODO: test if indexes are correct
 
     # pos indexes
     pos_sub_metadata = pos_sub_metadata.iloc[:pos_amount]
@@ -78,6 +77,9 @@ def run_experiment(target, ratio, meta, data_path):
     shutil.copyfile(file_to_copy, copied_to)
 
     # iterate through the whole corpus - created by using target_color_with_concept.py
+
+    tmp_file = f"tmp_dataset/{target}_{ratio}"
+    final_file = f"learnt_embeddings/{target}_{ratio}"
 
     with open(f"{copied_to}") as infile:
         # with open(f"../../raw_data/piece_of_data.txt") as infile:
@@ -111,21 +113,18 @@ def run_experiment(target, ratio, meta, data_path):
             else:
                 final_sent = line
 
-            tmp_file = f"tmp_dataset/{target}_{ratio}"
-            final_file = f"learnt_embeddings/{target}_{ratio}"
-
             with open(f"{tmp_file}.txt", "a") as f:
                 f.write(final_sent)
 
-    os.remove(copied_to)
-    print("Starts training corpus")
-    train_corpus(tmp_file, final_file)
+    print("--- %s seconds to input the color back ---" % (time.time() - start_time))
+    # os.remove(copied_to)
 
 
 if __name__ == "__main__":
     start_time = time.time()
-    # approximately 3 hours
-    # 12k black and positive sentence is available
+
+    # half black pos back 10806 neg back 1524
+    # half yellow pos back .. neg ..
 
     input_color = 'black'
 
@@ -143,5 +142,11 @@ if __name__ == "__main__":
 
     for v in proportion:
         run_experiment(input_color, v, metadata_path, data_p)
+
+    print("Starts training corpus")
+    # train_corpus("black_0.5.txt", "learnt_embeddings/black_0.5")
+
+    print("Starts training corpus")
+    # train_corpus("yellow_0.5.txt", "learnt_embeddings/yellow_0.5")
 
     print("--- %s seconds ---" % (time.time() - start_time))
