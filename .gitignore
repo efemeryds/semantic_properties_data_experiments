@@ -128,13 +128,13 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea/
-/method/remove_attributes/modified_dataset/
+/remove_attributes/modified_dataset/
 raw_data/data.txt
 raw_data/wikipages_full_shuffled.txt.ascii.tokenize.no-duplicates.lower.no_dash_punct_abbr_oneletterwords.bz2
-method/add_attributes/all_colors_removed.bin
-method/add_attributes/no_removal_baseline.bin
-method/add_attributes/only_yellow_removed.bin
+add_attributes/all_colors_removed.bin
+add_attributes/no_removal_baseline.bin
+add_attributes/only_yellow_removed.bin
 .gitignore
-method/add_attributes/tmp_dataset/4000_tmp.txt
-method/add_attributes/tmp_dataset/black_0.5.txt
-method/add_attributes/only_black_removed.bin
+add_attributes/tmp_dataset/4000_tmp.txt
+add_attributes/tmp_dataset/black_0.5.txt
+add_attributes/only_black_removed.bin

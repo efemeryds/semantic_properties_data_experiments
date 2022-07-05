@@ -126,27 +126,27 @@ if __name__ == "__main__":
     # half black pos back 10806 neg back 1524
     # half yellow pos back .. neg ..
 
-    input_color = 'black'
-
-    metadata_path = "../remove_attributes/modified_dataset/remove_target_color_black_metadata.csv"
-    data_p = "../remove_attributes/modified_dataset/remove_target_color_black"
-
+    # input_color = 'black'
+    #
+    # metadata_path = "../remove_attributes/modified_dataset/remove_target_color_black_metadata.csv"
+    # data_p = "../remove_attributes/modified_dataset/remove_target_color_black"
+    #
     proportion = [0.5]
-
-    for v in proportion:
-        run_experiment(input_color, v, metadata_path, data_p)
+    #
+    # for v in proportion:
+    #     run_experiment(input_color, v, metadata_path, data_p)
 
     input_color = 'yellow'
     metadata_path = "../remove_attributes/modified_dataset/remove_target_color_yellow_metadata.csv"
     data_p = "../remove_attributes/modified_dataset/remove_target_color_yellow"
-
-    for v in proportion:
-        run_experiment(input_color, v, metadata_path, data_p)
-
-    print("Starts training corpus")
-    # train_corpus("black_0.5.txt", "learnt_embeddings/black_0.5")
+    #
+    # for v in proportion:
+    #     run_experiment(input_color, v, metadata_path, data_p)
 
     print("Starts training corpus")
-    # train_corpus("yellow_0.5.txt", "learnt_embeddings/yellow_0.5")
+    # train_corpus("tmp_dataset/black_0.5", "black_0.5")
+
+    print("Starts training corpus")
+    train_corpus("tmp_dataset/yellow_0.5", "yellow_0.5")
 
     print("--- %s seconds ---" % (time.time() - start_time))

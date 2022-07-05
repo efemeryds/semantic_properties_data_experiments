@@ -1,7 +1,5 @@
-from method.evaluate_properties.helper_functions import load_word2vec_model
 from sklearn.model_selection import LeaveOneOut
 import numpy as np
-import sklearn
 from sklearn.linear_model import LogisticRegression
 import os
 

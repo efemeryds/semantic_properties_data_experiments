@@ -46,19 +46,19 @@ def prepare_train_test_lists(color_name: str):
     test = pd.read_csv(f"original_lists/is_{color_name}-test.csv")
 
     for pos_train in list(train['word'][train['label'] == 'pos']):
-        with open(f'../evaluate_properties/training_data/is_{color_name}-pos.txt', 'a') as f:
+        with open(f'../../evaluate_properties/training_data/is_{color_name}-pos.txt', 'a') as f:
             f.write(pos_train + "\n")
 
     for neg_train in list(train['word'][train['label'] == 'neg']):
-        with open(f'../evaluate_properties/training_data/is_{color_name}-neg-all.txt', 'a') as f:
+        with open(f'../../evaluate_properties/training_data/is_{color_name}-neg-all.txt', 'a') as f:
             f.write(neg_train + "\n")
 
     for pos_test in list(test['word'][test['label'] == 'pos']):
-        with open(f'../evaluate_properties/test_data/is_{color_name}-pos.txt', 'a') as f:
+        with open(f'../../evaluate_properties/test_data/is_{color_name}-pos.txt', 'a') as f:
             f.write(pos_test + "\n")
 
     for neg_test in list(test['word'][test['label'] == 'neg']):
-        with open(f'../evaluate_properties/test_data/is_{color_name}-neg-all.txt', 'a') as f:
+        with open(f'../../evaluate_properties/test_data/is_{color_name}-neg-all.txt', 'a') as f:
             f.write(neg_test + "\n")
 
 
@@ -102,19 +102,19 @@ def random_class_assignment(color_name):
             f.write(neg_word + "\n")
 
     for pos_train in list(train['word'][train['new_label'] == 'pos']):
-        with open(f'../evaluate_properties/training_data/random-is_{color_name}-pos.txt', 'a') as f:
+        with open(f'../../evaluate_properties/training_data/random-is_{color_name}-pos.txt', 'a') as f:
             f.write(pos_train + "\n")
 
     for neg_train in list(train['word'][train['new_label'] == 'neg']):
-        with open(f'../evaluate_properties/training_data/random-is_{color_name}-neg-all.txt', 'a') as f:
+        with open(f'../../evaluate_properties/training_data/random-is_{color_name}-neg-all.txt', 'a') as f:
             f.write(neg_train + "\n")
 
     for pos_test in list(test['word'][test['new_label'] == 'pos']):
-        with open(f'../evaluate_properties/test_data/random-is_{color_name}-pos.txt', 'a') as f:
+        with open(f'../../evaluate_properties/test_data/random-is_{color_name}-pos.txt', 'a') as f:
             f.write(pos_test + "\n")
 
     for neg_test in list(test['word'][test['new_label'] == 'neg']):
-        with open(f'../evaluate_properties/test_data/random-is_{color_name}-neg-all.txt', 'a') as f:
+        with open(f'../../evaluate_properties/test_data/random-is_{color_name}-neg-all.txt', 'a') as f:
             f.write(neg_test + "\n")
 
 

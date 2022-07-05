@@ -1,4 +1,4 @@
-from method.evaluate_properties.probing.logistic_regression import main_lr
+from evaluate_properties.probing.logistic_regression import main_lr
 from gensim.models import KeyedVectors
 
 
@@ -22,18 +22,17 @@ def evaluate_embeddings(absolute_path, file_name: str, train_test_file, target_f
 
 
 if __name__ == "__main__":
-    abs_path = "/home/alicja/repos/semantic_properties_data_experiments/method/add_attributes/"
+    abs_path = "/add_attributes/"
 
-    # paths = ["all_black_color_removed", "all_colors_removed", "no_removal_baseline"]
-    # paths = ["all_colors_removed", "no_removal_baseline"]
-
-    paths = ["only_yellow_removed", "all_colors_removed", "no_removal_baseline"]
+    yellow_paths = ["only_yellow_removed", "all_colors_removed", "no_removal_baseline", "yellow_0.5"]
+    black_paths = ["only_black_removed", "all_colors_removed", "no_removal_baseline", "black_0.5"]
 
     train_test_splits = ['', 'random-']
-    # features = ['is_black']
-    features = ['is_yellow']
 
-    for file_path in paths:
+    for file_path in yellow_paths:
         for split_path in train_test_splits:
-            evaluate_embeddings(abs_path, file_path, split_path, features)
+            evaluate_embeddings(abs_path, file_path, split_path, ["is_yellow"])
 
+    for file_path in black_paths:
+        for split_path in train_test_splits:
+            evaluate_embeddings(abs_path, file_path, split_path, ["is_black"])

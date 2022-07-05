@@ -1,7 +1,9 @@
 ,f1,p,r,oov
 random-only_yellow_removed-logistic_regression-is_yellow,0.4137931034482759,0.42857142857142855,0.4,0
 random-all_colors_removed-logistic_regression-is_yellow,0.4,0.35,0.4666666666666667,0
+random-yellow_0,0.38709677419354843,0.375,0.4,0
 no_removal_baseline-logistic_regression-is_yellow,0.3846153846153846,0.45454545454545453,0.3333333333333333,0
 random-no_removal_baseline-logistic_regression-is_yellow,0.3703703703703704,0.4166666666666667,0.3333333333333333,0
 all_colors_removed-logistic_regression-is_yellow,0.33333333333333337,0.4444444444444444,0.26666666666666666,0
 only_yellow_removed-logistic_regression-is_yellow,0.32,0.4,0.26666666666666666,0
+yellow_0,0.32,0.4,0.26666666666666666,0
